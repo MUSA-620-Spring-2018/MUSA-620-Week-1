@@ -74,7 +74,7 @@ japanAgePop <- mutate(japanData, POP = ifelse(SEX == 'Male', POP * -1, POP)) # m
 
 saveGIF({
   
-  for (i in 2000:2050) {
+  for (i in 2010:2050) {
     
     year <- as.character(i)
     
