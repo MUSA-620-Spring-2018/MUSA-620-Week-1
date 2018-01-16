@@ -105,3 +105,35 @@ saveGIF({
 }, movie.name = 'japan-pop-pyramid.gif', interval = 0.1, ani.width = 700, ani.height = 600)
   
   
+
+
+
+for (i in 2010:2050) {
+  
+  year <- as.character(i)
+  
+  year_data <- filter(japanAgePop, time == i)
+  
+  yearplot <- ggplot(year_data, aes(x = AGE, y = POP, fill = SEX, width = 1)) +
+    coord_fixed() + 
+    coord_flip() +
+    geom_bar(data = subset(year_data, SEX == "Female"), stat = "identity") +
+    geom_bar(data = subset(year_data, SEX == "Male"), stat = "identity") +
+    scale_y_continuous(breaks = seq(-1000000, 1000000, 500000), # from -1m to 1m, counting by 500k
+                       labels = paste0(as.character(c(1, 0.5, 0, 0.5, 1)), "m"),
+                       limits = c(-1300000, 1300000)) +
+    theme_economist(base_size = 14) + 
+    scale_fill_manual(values = c('#fe66cb', '#0000fe')) + 
+    labs(title = paste("Population structure of Japan: ",year), y='Population',x='Age') +
+    theme(legend.position = "bottom", legend.title = element_blank()) + 
+    guides(fill = guide_legend(reverse = TRUE))
+  
+  imagepath <- paste0("d:/japan",i,".jpg") 
+  jpeg(imagepath)
+  print(yearplot)
+  dev.off()
+  
+}
+
+# https://ezgif.com - gif maker
+
