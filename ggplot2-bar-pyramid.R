@@ -69,6 +69,8 @@ ggplot(year_data, aes(x = AGE, y = POP, fill = SEX, width = 1)) +
 
 
 # ***Animated Population Pyramid***
+# Using the saveGIF method requires installing imagemagick: https://www.imagemagick.org/script/index.php
+# Alternatively, you can create the GIF manually using the code further below
 
 japanAgePop <- mutate(japanData, POP = ifelse(SEX == 'Male', POP * -1, POP)) # make male ages negative
 
@@ -107,6 +109,8 @@ saveGIF({
   
 
 
+# If you are having trouble installing ImageMagick, you can use the code below to export the image files
+# and merge them into a GIF manually using this site: https://ezgif.com/maker
 
 for (i in 2010:2050) {
   
@@ -135,5 +139,5 @@ for (i in 2010:2050) {
   
 }
 
-# https://ezgif.com - gif maker
+
 
